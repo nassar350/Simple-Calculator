@@ -59,7 +59,6 @@
             txt.Name = "txt";
             txt.Size = new Size(398, 54);
             txt.TabIndex = 0;
-            txt.TextChanged += txt_TextChanged;
             // 
             // btn_clear
             // 

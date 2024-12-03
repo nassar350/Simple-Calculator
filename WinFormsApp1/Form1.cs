@@ -249,11 +249,6 @@ namespace WinFormsApp1
             emptyAfterCalculation = true;
         }
 
-        private void txt_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btn_mul_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txt.Text))
