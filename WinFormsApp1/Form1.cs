@@ -10,8 +10,9 @@ namespace WinFormsApp1
 
         bool emptyAfterCalculation = false;
 
-        private void calculation(decimal num)
+        private void Calculation(decimal num, out bool error)
         {
+            error = false;
             switch (op)
             {
                 case '+':
@@ -28,6 +29,10 @@ namespace WinFormsApp1
                     {
                         result /= num;
                     }
+                    else
+                    {
+                        error = true;
+                    }
                     break;
                 case '%':
                     result %= num;
@@ -36,6 +41,24 @@ namespace WinFormsApp1
                     result = num;
                     break;
             }
+        }
+
+        private void EmptyTextboxOrNot()
+        {
+            if (emptyAfterCalculation)
+            {
+                txt.Clear();
+                emptyAfterCalculation = false;
+            }
+        }
+
+        private void ValideNumberError()
+        {
+            result = null;
+            op = null;
+            emptyAfterCalculation = true;
+
+            txt.Text = "Enter a valid number";
         }
 
         public Form1()
@@ -53,122 +76,67 @@ namespace WinFormsApp1
 
         private void btn_zero_Click(object sender, EventArgs e)
         {
-            if (emptyAfterCalculation)
-            {
-                txt.Clear();
-                emptyAfterCalculation = false;
-            }
-
+            EmptyTextboxOrNot();
             txt.Text += '0';
         }
 
         private void btn_dot_Click(object sender, EventArgs e)
         {
-            if (emptyAfterCalculation)
-            {
-                txt.Clear();
-                emptyAfterCalculation = false;
-            }
-
+            EmptyTextboxOrNot();
             txt.Text += '.';
         }
 
         private void btn_one_Click(object sender, EventArgs e)
         {
-            if (emptyAfterCalculation)
-            {
-                txt.Clear();
-                emptyAfterCalculation = false;
-            }
-
+            EmptyTextboxOrNot();
             txt.Text += '1';
         }
 
         private void btn_two_Click(object sender, EventArgs e)
         {
-            if (emptyAfterCalculation)
-            {
-                txt.Clear();
-                emptyAfterCalculation = false;
-            }
-
+            EmptyTextboxOrNot();
             txt.Text += '2';
         }
 
         private void btn_three_Click(object sender, EventArgs e)
         {
-            if (emptyAfterCalculation)
-            {
-                txt.Clear();
-                emptyAfterCalculation = false;
-            }
-
+            EmptyTextboxOrNot();
             txt.Text += '3';
         }
 
         private void btn_four_Click(object sender, EventArgs e)
         {
-            if (emptyAfterCalculation)
-            {
-                txt.Clear();
-                emptyAfterCalculation = false;
-            }
-
+            EmptyTextboxOrNot();
             txt.Text += '4';
         }
 
         private void btn_five_Click(object sender, EventArgs e)
         {
-            if (emptyAfterCalculation)
-            {
-                txt.Clear();
-                emptyAfterCalculation = false;
-            }
-
+            EmptyTextboxOrNot();
             txt.Text += '5';
         }
 
         private void btn_six_Click(object sender, EventArgs e)
         {
-            if (emptyAfterCalculation)
-            {
-                txt.Clear();
-                emptyAfterCalculation = false;
-            }
-
+            EmptyTextboxOrNot();
             txt.Text += '6';
         }
 
         private void btn_seven_Click(object sender, EventArgs e)
         {
-            if (emptyAfterCalculation)
-            {
-                txt.Clear();
-                emptyAfterCalculation = false;
-            }
-
+            EmptyTextboxOrNot();
             txt.Text += '7';
         }
 
         private void btn_eight_Click(object sender, EventArgs e)
         {
-            if (emptyAfterCalculation)
-            {
-                txt.Clear();
-                emptyAfterCalculation = false;
-            }
-
+            EmptyTextboxOrNot();
             txt.Text += '8';
         }
 
         private void btn_nine_Click(object sender, EventArgs e)
         {
-            if (emptyAfterCalculation)
-            {
-                txt.Clear();
-                emptyAfterCalculation = false;
-            }
-
+            EmptyTextboxOrNot();
             txt.Text += '9';
         }
 
@@ -186,11 +154,28 @@ namespace WinFormsApp1
             {
                 if (decimal.TryParse(txt.Text, out decimal input))
                 {
-                    calculation(input);
-                    txt.Text = result.ToString();
+                    Calculation(input, out bool error);
 
-                    op = '+';
-                }                
+                    if (error)
+                    {
+                        txt.Text = "Cannot divide by zero";
+                        result = null;
+                        op = null;
+                    }
+                    else
+                    {
+                        txt.Text = result.ToString();
+                        op = '+';
+                    }
+                }
+                else
+                {
+                    ValideNumberError();
+                }
+            }
+            else
+            {
+                ValideNumberError();
             }
 
             emptyAfterCalculation = true;
@@ -202,12 +187,31 @@ namespace WinFormsApp1
             {
                 if (decimal.TryParse(txt.Text, out decimal input))
                 {
-                    calculation(input);
-                    op = null;
-                }                
-            }
+                    Calculation(input, out bool error);
 
-            txt.Text = result.ToString();
+                    if (error)
+                    {
+                        txt.Text = "Cannot divide by zero";
+                        result = null;
+                    }
+                    else
+                    {
+                        txt.Text = result.ToString();
+                    }
+
+                    op = null;
+                }
+                else
+                {
+                    ValideNumberError();
+                    return;
+                }
+            }
+            else
+            {
+                ValideNumberError();
+                return;
+            }
 
             emptyAfterCalculation = true;
         }
@@ -218,11 +222,28 @@ namespace WinFormsApp1
             {
                 if (decimal.TryParse(txt.Text, out decimal input))
                 {
-                    calculation(input);
-                    txt.Text = result.ToString();
+                    Calculation(input, out bool error);
 
-                    op = '-';
+                    if (error)
+                    {
+                        txt.Text = "Cannot divide by zero";
+                        result = null;
+                        op = null;
+                    }
+                    else
+                    {
+                        txt.Text = result.ToString();
+                        op = '-';
+                    }
                 }
+                else
+                {
+                    ValideNumberError();
+                }
+            }
+            else
+            {
+                ValideNumberError();
             }
 
             emptyAfterCalculation = true;
@@ -239,13 +260,30 @@ namespace WinFormsApp1
             {
                 if (decimal.TryParse(txt.Text, out decimal input))
                 {
-                    calculation(input);
-                    txt.Text = result.ToString();
+                    Calculation(input, out bool error);
 
-                    op = '*';
+                    if (error)
+                    {
+                        txt.Text = "Cannot divide by zero";
+                        result = null;
+                        op = null;  
+                    }
+                    else
+                    {
+                        txt.Text = result.ToString();
+                        op = '*';
+                    }
+                }
+                else
+                {
+                    ValideNumberError();
                 }
             }
-            
+            else
+            {
+                ValideNumberError();
+            }
+
             emptyAfterCalculation = true;
         }
 
@@ -255,12 +293,29 @@ namespace WinFormsApp1
             {
                 if (decimal.TryParse(txt.Text, out decimal input))
                 {
-                    calculation(input);
-                    txt.Text = result.ToString();
+                    Calculation(input, out bool error);
 
-                    op = '%';
-                }              
-            }          
+                    if (error)
+                    {
+                        txt.Text = "Cannot divide by zero";
+                        result = null;
+                        op = null;
+                    }
+                    else
+                    {
+                        txt.Text = result.ToString();
+                        op = '%';
+                    }
+                }
+                else
+                {
+                    ValideNumberError();
+                }
+            }
+            else
+            {
+                ValideNumberError();
+            }
 
             emptyAfterCalculation = true;
         }
@@ -271,11 +326,28 @@ namespace WinFormsApp1
             {
                 if (decimal.TryParse(txt.Text, out decimal input))
                 {
-                    calculation(input);
-                    txt.Text = result.ToString();
+                    Calculation(input, out bool error);
 
-                    op = '/';
-                }                
+                    if (error)
+                    {
+                        txt.Text = "Cannot divide by zero";
+                        result = null;
+                        op = null;
+                    }
+                    else
+                    {
+                        txt.Text = result.ToString();
+                        op = '/';
+                    }
+                }
+                else
+                {
+                    ValideNumberError();
+                }
+            }
+            else
+            {
+                ValideNumberError();
             }
 
             emptyAfterCalculation = true;
