@@ -78,7 +78,6 @@
             btn_clear.Text = "Clear";
             btn_clear.UseVisualStyleBackColor = false;
             btn_clear.Click += btn_clear_Click;
-            btn_clear.MouseHover += btn_clear_MouseHover;
             // 
             // btn_delete
             // 
@@ -114,6 +113,7 @@
             btn_mod.TabIndex = 21;
             btn_mod.Text = "%";
             btn_mod.UseVisualStyleBackColor = false;
+            btn_mod.Click += btn_mod_Click;
             // 
             // btn_div
             // 
@@ -131,6 +131,7 @@
             btn_div.TabIndex = 22;
             btn_div.Text = "/";
             btn_div.UseVisualStyleBackColor = false;
+            btn_div.Click += btn_div_Click;
             // 
             // btn_seven
             // 
@@ -411,7 +412,6 @@
             Controls.Add(txt);
             Name = "Form1";
             Text = "Calculator";
-            Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
         }
