@@ -53,122 +53,56 @@ namespace WinFormsApp1
 
         private void btn_zero_Click(object sender, EventArgs e)
         {
-            if (emptyAfterCalculation)
-            {
-                txt.Clear();
-                emptyAfterCalculation = false;
-            }
-
             txt.Text += '0';
         }
 
         private void btn_dot_Click(object sender, EventArgs e)
         {
-            if (emptyAfterCalculation)
-            {
-                txt.Clear();
-                emptyAfterCalculation = false;
-            }
-
             txt.Text += '.';
         }
 
         private void btn_one_Click(object sender, EventArgs e)
         {
-            if (emptyAfterCalculation)
-            {
-                txt.Clear();
-                emptyAfterCalculation = false;
-            }
-
             txt.Text += '1';
         }
 
         private void btn_two_Click(object sender, EventArgs e)
         {
-            if (emptyAfterCalculation)
-            {
-                txt.Clear();
-                emptyAfterCalculation = false;
-            }
-
             txt.Text += '2';
         }
 
         private void btn_three_Click(object sender, EventArgs e)
         {
-            if (emptyAfterCalculation)
-            {
-                txt.Clear();
-                emptyAfterCalculation = false;
-            }
-
             txt.Text += '3';
         }
 
         private void btn_four_Click(object sender, EventArgs e)
         {
-            if (emptyAfterCalculation)
-            {
-                txt.Clear();
-                emptyAfterCalculation = false;
-            }
-
             txt.Text += '4';
         }
 
         private void btn_five_Click(object sender, EventArgs e)
         {
-            if (emptyAfterCalculation)
-            {
-                txt.Clear();
-                emptyAfterCalculation = false;
-            }
-
             txt.Text += '5';
         }
 
         private void btn_six_Click(object sender, EventArgs e)
         {
-            if (emptyAfterCalculation)
-            {
-                txt.Clear();
-                emptyAfterCalculation = false;
-            }
-
             txt.Text += '6';
         }
 
         private void btn_seven_Click(object sender, EventArgs e)
         {
-            if (emptyAfterCalculation)
-            {
-                txt.Clear();
-                emptyAfterCalculation = false;
-            }
-
             txt.Text += '7';
         }
 
         private void btn_eight_Click(object sender, EventArgs e)
         {
-            if (emptyAfterCalculation)
-            {
-                txt.Clear();
-                emptyAfterCalculation = false;
-            }
-
             txt.Text += '8';
         }
 
         private void btn_nine_Click(object sender, EventArgs e)
         {
-            if (emptyAfterCalculation)
-            {
-                txt.Clear();
-                emptyAfterCalculation = false;
-            }
-
             txt.Text += '9';
         }
 
@@ -230,7 +164,12 @@ namespace WinFormsApp1
 
         private void txt_TextChanged(object sender, EventArgs e)
         {
-
+            if (emptyAfterCalculation)
+            {
+                char lastChar = txt.Text[txt.Text.Length - 1];
+                txt.Text = lastChar.ToString();
+                emptyAfterCalculation = false;
+            }
         }
 
         private void btn_mul_Click(object sender, EventArgs e)
