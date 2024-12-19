@@ -59,6 +59,8 @@
             txt.Name = "txt";
             txt.Size = new Size(398, 54);
             txt.TabIndex = 0;
+            txt.TextChanged += txt_TextChanged;
+            txt.KeyPress += txt_KeyPress;
             // 
             // btn_clear
             // 
@@ -411,6 +413,7 @@
             Controls.Add(txt);
             Name = "Form1";
             Text = "Calculator";
+            Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
         }
